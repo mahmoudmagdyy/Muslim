@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:azkark/util/helpers.dart';
 import 'package:provider/provider.dart';
 import '../../providers/settings_provider.dart';
@@ -11,7 +12,7 @@ import '../../util/colors.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatelessWidget {
-  const Settings({Key key}) : super(key: key);
+  Settings({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -131,6 +132,7 @@ class Settings extends StatelessWidget {
     );
   }
 
+  AudioPlayer player = AudioPlayer();
   Widget _buildChoseAzan(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
@@ -155,7 +157,8 @@ class Settings extends StatelessWidget {
                         groupValue:
                             Provider.of<SettingsProvider>(context, listen: true)
                                 .value,
-                        onChanged: (value) async{
+                        onChanged: (value) async {
+                          await player.play(AssetSource('azan/a.mp3'));
                           await setAzanSound("a");
                           Provider.of<SettingsProvider>(context, listen: false)
                               .save_data(value.toString(), 1);
@@ -181,7 +184,8 @@ class Settings extends StatelessWidget {
                         groupValue:
                             Provider.of<SettingsProvider>(context, listen: true)
                                 .value,
-                        onChanged: (value) async{
+                        onChanged: (value) async {
+                          await player.play(AssetSource('azan/b.mp3'));
                           await setAzanSound("b");
                           Provider.of<SettingsProvider>(context, listen: false)
                               .save_data(value.toString(), 2);
@@ -207,7 +211,8 @@ class Settings extends StatelessWidget {
                         groupValue:
                             Provider.of<SettingsProvider>(context, listen: true)
                                 .value,
-                        onChanged: (value) async{
+                        onChanged: (value) async {
+                          await player.play(AssetSource('azan/c.mp3'));
                           await setAzanSound("c");
                           Provider.of<SettingsProvider>(context, listen: false)
                               .save_data(value.toString(), 3);
@@ -233,7 +238,8 @@ class Settings extends StatelessWidget {
                         groupValue:
                             Provider.of<SettingsProvider>(context, listen: true)
                                 .value,
-                        onChanged: (value) async{
+                        onChanged: (value) async {
+                          await player.play(AssetSource('azan/d.mp3'));
                           await setAzanSound("d");
                           Provider.of<SettingsProvider>(context, listen: false)
                               .save_data(value.toString(), 4);
@@ -247,6 +253,12 @@ class Settings extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+                TextButton(
+                  onPressed: () {
+                    player.stop();
+                  },
+                  child: const Text('حفظ'),
                 ),
               ],
             ),

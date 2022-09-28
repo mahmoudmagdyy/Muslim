@@ -1,14 +1,15 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:azkark/database/cache_heper.dart';
 import 'package:azkark/pages/quran/Sora.dart';
+import 'package:azkark/providers/setting_cubit.dart';
 import 'package:azkark/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/surah.dart';
-
-
 
 class Quran extends StatefulWidget {
   const Quran({Key key}) : super(key: key);
@@ -24,11 +25,9 @@ class _QuranState extends State<Quran> with TickerProviderStateMixin {
   double fontSize;
   final ScrollController _controller = ScrollController();
   @override
-
   void initState() {
-
-      fontSize = Provider.of<SettingsProvider>(context, listen: false)
-          .getsettingField('font_size');
+    fontSize = Provider.of<SettingsProvider>(context, listen: false)
+        .getsettingField('font_size');
 
     readJson();
     super.initState();
@@ -46,15 +45,17 @@ class _QuranState extends State<Quran> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocConsumer<SettingCubit, SettingStates>(
+        listener: (context, state) {}, builder: (context, state) {
+          return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading:IconButton(
-          icon:const Icon( Icons.arrow_back),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         actions: [
           Transform.rotate(
             angle: isReverse ? pi : 2 * pi,
@@ -65,14 +66,37 @@ class _QuranState extends State<Quran> with TickerProviderStateMixin {
                     isReverse = !isReverse;
                   });
                 }),
-          )
-        ],
+          ),
+          IconButton(
+            icon: const Icon(Icons.save),
+            onPressed: () {
+              int _id = CacheHelper.getData(key: 'idSurah');
+              // print('get id surah $_id');
 
+              if (CacheHelper.getData(key: 'idSurah') != null) {
+                SettingCubit.get(context).surahList.forEach((element) {
+                  if (element.id == _id) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) =>
+                            SurahPage(surah: element),
+                      ),
+                    );
+                  } else {}
+                });
+              }
+            },
+          ),
+        ],
       ),
       body: surahList.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : chaptersList(isReverse ? surahList.reversed.toList() : surahList),
     );
+        });
+
+    
   }
 
   Widget chaptersList(List<Surah> chapters) {
@@ -82,19 +106,18 @@ class _QuranState extends State<Quran> with TickerProviderStateMixin {
         leading: CircleAvatar(
           child: Text(chapters[index].id.toString()),
         ),
-        title: Text(chapters[index].name, style: TextStyle(
+        title: Text(
+          chapters[index].name,
+          style:  TextStyle(
             fontSize: fontSize,
             fontWeight: FontWeight.w500,
-
-        ),),
+          ),
+        ),
         subtitle: Text(chapters[index].versesCount.toString()),
         trailing: Text(
           chapters[index].arabicName,
-          style: TextStyle(
-            fontSize: fontSize,
-            fontWeight: FontWeight.w500,
-            fontFamily: '2'
-          ),
+          style:  TextStyle(
+              fontSize: fontSize, fontWeight: FontWeight.w500, fontFamily: '2'),
         ),
         onTap: () => Navigator.push(
           context,

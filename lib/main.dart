@@ -1,24 +1,39 @@
-
-import 'package:azkark/pages/home/home_page.dart';
-import 'package:azkark/pages/home/loading_page.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'localization/app_localizations_delegate.dart';
-import 'providers/azkar_provider.dart';
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import 'package:azkark/database/cache_heper.dart';
+import 'package:azkark/providers/setting_cubit.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:timezone/data/latest.dart' as tz;
+
+import 'localization/app_localizations_delegate.dart';
+import 'pages/home/home_page.dart';
+import 'pages/home/loading_page.dart';
 import 'providers/asmaallah_provider.dart';
+import 'providers/azkar_provider.dart';
 import 'providers/categories_provider.dart';
 import 'providers/favorites_provider.dart';
 import 'providers/prayer_provider.dart';
-import 'providers/sections_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'providers/sebha_provider.dart';
+import 'providers/sections_provider.dart';
 import 'providers/settings_provider.dart';
+import 'services/services_export.dart';
 import 'util/app_theme.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
+  await AndroidAlarmManager.initialize();
+  tz.initializeTimeZones();
+  await NotificationServices().initNotification();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -30,7 +45,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<SectionsProvider>(
             create: (context) => SectionsProvider()),
         ChangeNotifierProvider<SettingsProvider>(
-            create: (context) => SettingsProvider()),
+            create: (context) => SettingsProvider()..get_data()),
         ChangeNotifierProvider<CategoriesProvider>(
             create: (context) => CategoriesProvider()),
         ChangeNotifierProvider<SebhaProvider>(
@@ -43,6 +58,9 @@ class MyApp extends StatelessWidget {
             create: (context) => PrayerProvider()),
         ChangeNotifierProvider<AsmaAllahProvider>(
             create: (context) => AsmaAllahProvider()),
+        BlocProvider(
+          create: (context) => SettingCubit()..readJson(),
+        )
       ],
       child: MaterialApp(
         title: 'Azkary',
@@ -57,21 +75,22 @@ class MyApp extends StatelessWidget {
         localeResolutionCallback: AppLocalizationsDelegate.resolution,
         home: Consumer<SectionsProvider>(
             builder: (context, sectionProvider, widget) {
-              return sectionProvider.isNewUser
-                  ? FutureBuilder(
-                future: sectionProvider.tryToGetData(context),
-                builder: (context, result) {
-                  if (result.connectionState == ConnectionState.waiting) {
-                    print(' The page is  Loading !!');
-                    return LoadingPage();
-                  } else {
-                    print(' Username is Hemeda ');
-                    return const HomePage();
-                  }
-                },
-              )
-                  : HomePage();
-            }),
+          return sectionProvider.isNewUser
+              ? FutureBuilder(
+                  future: sectionProvider.tryToGetData(context),
+                  builder: (context, result) {
+                    if (result.connectionState == ConnectionState.waiting) {
+                      debugPrint(' The page is  Loading !!');
+                      return const LoadingPage();
+                    } else {
+                      debugPrint(' Username is Hemeda ');
+                      return const HomePage();
+                    }
+                  },
+                )
+              : const HomePage();
+        }),
       ),
     );
-  }}
+  }
+}

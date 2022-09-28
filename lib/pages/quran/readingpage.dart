@@ -1,34 +1,16 @@
-import 'package:azkark/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:quran/quran.dart' as quran;
 
 import '../../models/surah.dart';
 
-class SurahPage extends StatefulWidget {
+class SurahPage extends StatelessWidget {
   final Surah surah;
   const SurahPage({Key key,  this.surah}) : super(key: key);
-
   @override
-  State<SurahPage> createState() => _SurahPageState();
-}
-
-class _SurahPageState extends State<SurahPage> {
-  double fontSize;
-  @override
-  void initState() {
-    super.initState();
-    fontSize = Provider.of<SettingsProvider>(context, listen: false)
-        .getsettingField('font_size');
-  }
-
-  @override
-
-
   Widget build(BuildContext context) {
-    int count = widget.surah.versesCount;
-    int index = widget.surah.id;
+    int count = surah.versesCount;
+    int index = surah.id;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -53,10 +35,10 @@ class _SurahPageState extends State<SurahPage> {
                       text: ' ' +
                           quran.getVerse(index, i, verseEndSymbol: false) +
                           ' ',
-                      style:  TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'Kitab',
-                        fontSize: fontSize,
-                        color: Colors.blue,
+                        fontSize: 25,
+                        color: Colors.black87,
                       ),
                     ),
                     WidgetSpan(
@@ -67,7 +49,7 @@ class _SurahPageState extends State<SurahPage> {
                             textAlign: TextAlign.center,
                             textScaleFactor: i.toString().length <= 2 ? 1 : .8,
                           ),
-                          radius: fontSize,
+                          radius: 14,
                         ))
                   }
                 ],
@@ -85,7 +67,7 @@ class _SurahPageState extends State<SurahPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              widget.surah.arabicName,
+              surah.arabicName,
               style: const TextStyle(
                 fontFamily: 'Aldhabi',
                 fontSize: 36,
@@ -97,7 +79,7 @@ class _SurahPageState extends State<SurahPage> {
               textDirection: TextDirection.rtl,
               style: TextStyle(
                 fontFamily: 'NotoNastaliqUrdu',
-                fontSize: 30,
+                fontSize: 24,
               ),
             ),
           ],

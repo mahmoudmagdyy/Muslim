@@ -20,7 +20,6 @@ MERGED from [:shared_preferences_android] C:\Users\Mahmoud Madgy\Desktop\Muslim\
 MERGED from [:permission_handler_android] C:\Users\Mahmoud Madgy\Desktop\Muslim\build\permission_handler_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:share_plus] C:\Users\Mahmoud Madgy\Desktop\Muslim\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-21:12
 MERGED from [:android_alarm_manager_plus] C:\Users\Mahmoud Madgy\Desktop\Muslim\build\android_alarm_manager_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
-MERGED from [:flutter_native_timezone] C:\Users\Mahmoud Madgy\Desktop\Muslim\build\flutter_native_timezone\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\Mahmoud Madgy\.gradle\caches\transforms-3\7ca1d12ce11835aeae7aab11d2bd0198\transformed\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Mahmoud Madgy\.gradle\caches\transforms-3\591037583eed3cad43e249610e19e22a\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:17:1-33:12
 MERGED from [com.google.firebase:firebase-analytics:21.1.0] C:\Users\Mahmoud Madgy\.gradle\caches\transforms-3\319619e8115d851a3b620299dd6354a7\transformed\jetified-firebase-analytics-21.1.0\AndroidManifest.xml:2:1-9:12
@@ -321,8 +320,6 @@ MERGED from [:share_plus] C:\Users\Mahmoud Madgy\Desktop\Muslim\build\share_plus
 MERGED from [:share_plus] C:\Users\Mahmoud Madgy\Desktop\Muslim\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:android_alarm_manager_plus] C:\Users\Mahmoud Madgy\Desktop\Muslim\build\android_alarm_manager_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:android_alarm_manager_plus] C:\Users\Mahmoud Madgy\Desktop\Muslim\build\android_alarm_manager_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:flutter_native_timezone] C:\Users\Mahmoud Madgy\Desktop\Muslim\build\flutter_native_timezone\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:flutter_native_timezone] C:\Users\Mahmoud Madgy\Desktop\Muslim\build\flutter_native_timezone\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\Mahmoud Madgy\.gradle\caches\transforms-3\7ca1d12ce11835aeae7aab11d2bd0198\transformed\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:19:5-21:41
 MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\Mahmoud Madgy\.gradle\caches\transforms-3\7ca1d12ce11835aeae7aab11d2bd0198\transformed\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:19:5-21:41
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Mahmoud Madgy\.gradle\caches\transforms-3\591037583eed3cad43e249610e19e22a\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:20:5-22:41

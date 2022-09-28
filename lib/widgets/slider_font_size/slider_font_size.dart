@@ -6,7 +6,8 @@ class SliderFontSize extends StatelessWidget {
   final Function onChanged, onChangedEnd;
   final Color overlayColor;
 
-  const SliderFontSize({Key key,
+  const SliderFontSize({
+    Key key,
     this.fontSize,
     this.min,
     this.max,
@@ -39,10 +40,12 @@ class SliderFontSize extends StatelessWidget {
                 inactiveTrackColor: blue[300],
                 trackShape: const RoundedRectSliderTrackShape(),
                 trackHeight: 4.0,
-                thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                thumbShape:
+                    const RoundSliderThumbShape(enabledThumbRadius: 12.0),
                 thumbColor: blue[500],
                 overlayColor: blue[900].withAlpha(15),
-                overlayShape: const RoundSliderOverlayShape(overlayRadius: 14.0),
+                overlayShape:
+                    const RoundSliderOverlayShape(overlayRadius: 14.0),
                 tickMarkShape: const RoundSliderTickMarkShape(),
                 activeTickMarkColor: blue[600],
                 inactiveTickMarkColor: blue[300],
@@ -54,8 +57,8 @@ class SliderFontSize extends StatelessWidget {
                 ),
               ),
               child: Slider(
-                min: 14,
-                max: 30,
+                min: 16,
+                max: 40,
                 divisions: 8,
                 label: '$fontSize',
                 value: fontSize,

@@ -213,7 +213,7 @@ class _HomePageState extends State<HomePage> {
               pathIcon: '0',
               onTap: () => Navigator.push(
                 context,
-                ScaleRoute(page: const Settings()),
+                ScaleRoute(page: Settings()),
               ),
             ),
           ),
@@ -279,8 +279,8 @@ class _HomePageState extends State<HomePage> {
         child: InkWell(
           highlightColor: blue[400],
           borderRadius: BorderRadius.circular(10),
-          onTap: () =>
-              Navigator.push(context, FadeRoute(page: const ViewAllCategories())),
+          onTap: () => Navigator.push(
+              context, FadeRoute(page: const ViewAllCategories())),
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),

@@ -1,3 +1,4 @@
+import 'package:azkark/database/cache_heper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,18 +20,19 @@ class SettingsProvider with ChangeNotifier {
   String val = 'a.mp3';
 
   Future save_data(String vall,int radioId) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('status', vall);
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    CacheHelper.sharedPreferences.setString('status', vall);
+
     value = radioId;
     notifyListeners();
   }
 
   Future get_data() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    val = prefs.getString('status') ?? 'a.mp3';
+    val = CacheHelper.sharedPreferences.getString('status') ?? 'a.mp3';
 
-    return prefs.getBool('status');
+    return CacheHelper.sharedPreferences.getBool('status');
   }
 
   dynamic getsettingField(String nameField) {

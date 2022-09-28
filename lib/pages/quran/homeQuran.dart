@@ -5,10 +5,8 @@ import 'package:azkark/pages/quran/readingpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 import '../../models/surah.dart';
-import '../../providers/settings_provider.dart';
 import '../../util/navigate_between_pages/scale_route.dart';
 
 class QuranHomeScreen extends StatefulWidget {
@@ -22,12 +20,9 @@ class _HomeScreenState extends State<QuranHomeScreen> with TickerProviderStateMi
   List<Surah> surahList = [];
   int selectedIndex = 0;
   bool isReverse = false;
-  double fontSize;
   final ScrollController _controller = ScrollController();
   @override
   void initState() {
-    fontSize = Provider.of<SettingsProvider>(context, listen: false)
-        .getsettingField('font_size');
     readJson();
     super.initState();
   }
@@ -82,7 +77,7 @@ class _HomeScreenState extends State<QuranHomeScreen> with TickerProviderStateMi
         title:  Text(
           chapters[index].arabicName,
           style: GoogleFonts.cairo(
-            fontSize: fontSize,
+            fontSize: 18,
           ),
         ),
       //  subtitle: Text(chapters[index].versesCount.toString()),
